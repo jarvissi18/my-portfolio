@@ -1,0 +1,330 @@
+import { Menu, X } from "lucide-react";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+
+export default function Navbar() {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const links = [
+    { name: "About", href: "#about" },
+    { name: "Skills", href: "#skills" },
+    { name: "Projects", href: "#projects" },
+    { name: "Journey", href: "#journey" },
+    { name: "Contact", href: "#contact" },
+  ];
+
+  const closeMenu = () => {
+    setIsOpen(false);
+  };
+
+  const navContainer = {
+    hidden: { opacity: 0, y: -12 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.55,
+        ease: [0.22, 1, 0.36, 1],
+      },
+    },
+  };
+
+  const navLinks = {
+    hidden: {},
+    visible: {
+      transition: {
+        staggerChildren: 0.07,
+        delayChildren: 0.12,
+      },
+    },
+  };
+
+  const navItem = {
+    hidden: {
+      opacity: 0,
+      y: -8,
+    },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.35,
+        ease: "easeOut",
+      },
+    },
+  };
+
+  return (
+    <motion.nav
+      variants={navContainer}
+      initial="hidden"
+      animate="visible"
+      className="fixed left-0 top-0 z-50 w-full border-b border-white/10 bg-[#050505]/80 backdrop-blur-xl"
+    >
+      <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-6 lg:px-8">
+
+        {/* Logo */}
+        <motion.a
+          href="#home"
+          onClick={closeMenu}
+          className="flex items-center"
+          aria-label="Swapnil - Home"
+          whileHover={{
+            scale: 1.06,
+            y: -1,
+          }}
+          whileTap={{
+            scale: 0.96,
+          }}
+          transition={{
+            duration: 0.2,
+          }}
+        >
+          <motion.img
+            src="/favicon.svg"
+            alt="Swapnil"
+            className="h-9 w-9 rounded-xl"
+            initial={{ opacity: 0, scale: 0.85 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{
+              duration: 0.45,
+              delay: 0.15,
+              ease: [0.22, 1, 0.36, 1],
+            }}
+          />
+        </motion.a>
+
+        {/* Desktop Navigation */}
+        <motion.div
+          variants={navLinks}
+          initial="hidden"
+          animate="visible"
+          className="hidden items-center gap-8 md:flex"
+        >
+          {links.map((link) => (
+            <motion.a
+              key={link.name}
+              variants={navItem}
+              href={link.href}
+              className="relative text-sm text-gray-400 transition-colors duration-200 hover:text-white"
+              whileHover={{ y: -1 }}
+              transition={{ duration: 0.2 }}
+            >
+              {link.name}
+
+              {/* Underline animation */}
+              <motion.span
+                className="absolute -bottom-2 left-0 h-px w-full origin-left bg-white"
+                initial={{ scaleX: 0, opacity: 0 }}
+                whileHover={{ scaleX: 1, opacity: 1 }}
+                transition={{
+                  duration: 0.22,
+                  ease: "easeOut",
+                }}
+              />
+            </motion.a>
+          ))}
+        </motion.div>
+
+        {/* Desktop Social Links */}
+        <motion.div
+          variants={navLinks}
+          initial="hidden"
+          animate="visible"
+          className="hidden items-center gap-3 md:flex"
+        >
+          {/* GitHub */}
+          <motion.a
+            variants={navItem}
+            href="https://github.com/jarvissi18"
+            target="_blank"
+            rel="noopener noreferrer"
+            whileHover={{
+              y: -2,
+              scale: 1.02,
+            }}
+            whileTap={{
+              scale: 0.97,
+            }}
+            className="rounded-lg border border-white/10 px-3 py-2 text-sm text-gray-400 transition-colors duration-200 hover:border-white/20 hover:text-white"
+          >
+            GitHub
+          </motion.a>
+
+          {/* LinkedIn */}
+          <motion.a
+            variants={navItem}
+            href="https://www.linkedin.com/in/swapnil-suryawanshi-719245267/"
+            target="_blank"
+            rel="noopener noreferrer"
+            whileHover={{
+              y: -2,
+              scale: 1.02,
+            }}
+            whileTap={{
+              scale: 0.97,
+            }}
+            className="rounded-lg border border-white/10 px-3 py-2 text-sm text-gray-400 transition-colors duration-200 hover:border-white/20 hover:text-white"
+          >
+            LinkedIn
+          </motion.a>
+        </motion.div>
+
+        {/* Mobile Menu Button */}
+        <motion.button
+          type="button"
+          onClick={() => setIsOpen((prev) => !prev)}
+          aria-label={isOpen ? "Close menu" : "Open menu"}
+          aria-expanded={isOpen}
+          whileTap={{ scale: 0.92 }}
+          whileHover={{ y: -1 }}
+          className="rounded-lg border border-white/10 p-2 text-gray-300 transition-colors duration-200 hover:border-white/20 hover:text-white md:hidden"
+        >
+          <AnimatePresence mode="wait" initial={false}>
+            {isOpen ? (
+              <motion.div
+                key="close"
+                initial={{ opacity: 0, rotate: -90, scale: 0.8 }}
+                animate={{ opacity: 1, rotate: 0, scale: 1 }}
+                exit={{ opacity: 0, rotate: 90, scale: 0.8 }}
+                transition={{ duration: 0.2 }}
+              >
+                <X size={20} />
+              </motion.div>
+            ) : (
+              <motion.div
+                key="menu"
+                initial={{ opacity: 0, rotate: 90, scale: 0.8 }}
+                animate={{ opacity: 1, rotate: 0, scale: 1 }}
+                exit={{ opacity: 0, rotate: -90, scale: 0.8 }}
+                transition={{ duration: 0.2 }}
+              >
+                <Menu size={20} />
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </motion.button>
+      </div>
+
+      {/* Mobile Navigation */}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{
+              opacity: 0,
+              height: 0,
+            }}
+            animate={{
+              opacity: 1,
+              height: "auto",
+            }}
+            exit={{
+              opacity: 0,
+              height: 0,
+            }}
+            transition={{
+              duration: 0.3,
+              ease: [0.22, 1, 0.36, 1],
+            }}
+            className="overflow-hidden border-t border-white/10 bg-[#050505] md:hidden"
+          >
+            <motion.div
+              initial="hidden"
+              animate="visible"
+              variants={{
+                hidden: {},
+                visible: {
+                  transition: {
+                    staggerChildren: 0.06,
+                    delayChildren: 0.05,
+                  },
+                },
+              }}
+              className="flex flex-col gap-5 px-6 py-5"
+            >
+              {/* Navigation Links */}
+              {links.map((link) => (
+                <motion.a
+                  key={link.name}
+                  variants={{
+                    hidden: {
+                      opacity: 0,
+                      x: -12,
+                    },
+                    visible: {
+                      opacity: 1,
+                      x: 0,
+                      transition: {
+                        duration: 0.3,
+                        ease: "easeOut",
+                      },
+                    },
+                  }}
+                  href={link.href}
+                  onClick={closeMenu}
+                  whileHover={{
+                    x: 4,
+                    color: "#ffffff",
+                  }}
+                  className="text-sm text-gray-400 transition-colors"
+                >
+                  {link.name}
+                </motion.a>
+              ))}
+
+              {/* Mobile Social Links */}
+              <motion.div
+                variants={{
+                  hidden: {
+                    opacity: 0,
+                    y: 8,
+                  },
+                  visible: {
+                    opacity: 1,
+                    y: 0,
+                    transition: {
+                      duration: 0.3,
+                    },
+                  },
+                }}
+                className="flex gap-3 border-t border-white/10 pt-5"
+              >
+                <motion.a
+                  href="https://github.com/jarvissi18"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={closeMenu}
+                  whileHover={{
+                    y: -2,
+                  }}
+                  whileTap={{
+                    scale: 0.97,
+                  }}
+                  className="rounded-lg border border-white/10 px-3 py-2 text-sm text-gray-400 transition-colors duration-200 hover:border-white/20 hover:text-white"
+                >
+                  GitHub
+                </motion.a>
+
+                <motion.a
+                  href="https://www.linkedin.com/in/swapnil-suryawanshi-719245267/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={closeMenu}
+                  whileHover={{
+                    y: -2,
+                  }}
+                  whileTap={{
+                    scale: 0.97,
+                  }}
+                  className="rounded-lg border border-white/10 px-3 py-2 text-sm text-gray-400 transition-colors duration-200 hover:border-white/20 hover:text-white"
+                >
+                  LinkedIn
+                </motion.a>
+              </motion.div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.nav>
+  );
+}

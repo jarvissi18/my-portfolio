@@ -1,0 +1,15 @@
+/*
+  App-specific styles
+  ====================
+  Portfolio styling is handled with Tailwind CSS
+  and component-level classes.
+
+  Keep this file minimal to avoid conflicts
+  with Tailwind and the default Vite styles.
+*/
+
+/* Prevent accidental horizontal overflow */
+#root {
+  width: 100%;
+  min-width: 0;
+}

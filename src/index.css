@@ -1,0 +1,146 @@
+@import "tailwindcss";
+
+/* =========================================
+   GLOBAL VIEWPORT RESET
+========================================= */
+
+html {
+  width: 100%;
+  max-width: 100%;
+  min-width: 320px;
+  margin: 0;
+  padding: 0;
+  overflow-x: clip;
+  scroll-behavior: smooth;
+}
+
+body {
+  width: 100%;
+  max-width: 100%;
+  min-width: 320px;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+
+  background: #050505;
+  color: #ffffff;
+
+  font-family:
+    Inter,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+
+  overflow-x: clip;
+}
+
+/* React root */
+#root {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  overflow-x: clip;
+}
+
+/* =========================================
+   BOX SIZING
+========================================= */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Prevent accidental viewport overflow */
+main,
+section,
+nav,
+footer,
+header,
+div {
+  max-width: 100%;
+}
+
+/* =========================================
+   MEDIA
+========================================= */
+
+img,
+svg,
+video,
+canvas,
+iframe {
+  display: block;
+  max-width: 100%;
+}
+
+/* =========================================
+   TEXT
+========================================= */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+span,
+a {
+  overflow-wrap: anywhere;
+}
+
+/* =========================================
+   LINKS
+========================================= */
+
+a {
+  text-decoration: none;
+}
+
+/* =========================================
+   SELECTION
+========================================= */
+
+::selection {
+  background: #ffffff;
+  color: #000000;
+}
+
+/* =========================================
+   MOBILE TAP
+========================================= */
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* =========================================
+   SECTION OFFSET
+========================================= */
+
+section {
+  width: 100%;
+  max-width: 100%;
+  scroll-margin-top: 80px;
+}
+
+/* =========================================
+   MOBILE ANIMATION SAFETY
+
+   Mobile par transform-based animations
+   temporarily disable karte hain taaki
+   horizontal clipping na ho.
+========================================= */
+
+@media (max-width: 639px) {
+  #root * {
+    transform: none !important;
+  }
+}
