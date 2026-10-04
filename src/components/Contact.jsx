@@ -73,7 +73,7 @@ export default function Contact() {
               }}
               className="mb-3 text-xs font-medium uppercase text-gray-500 sm:text-sm"
             >
-              Contact
+              05 /Contact
             </motion.p>
 
             <h2 className="w-full max-w-3xl break-words text-4xl font-bold leading-[1.05] tracking-tight sm:text-5xl lg:text-6xl">
